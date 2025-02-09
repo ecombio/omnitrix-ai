@@ -1,0 +1,3 @@
+# config.py
+GOOGLE_API_KEY = "AIzaSyCzcoXezwbKaCoCXXwj2j6kZKkBFoNyLGE"
+SEARCH_ENGINE_ID = "376df7a34ae564ccd"

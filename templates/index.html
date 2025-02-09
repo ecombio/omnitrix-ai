@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omnitrix AI Search</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="text-center">
+    <div class="container mt-5">
+        <h1 class="mb-4">🔍 Omnitrix AI Search</h1>
+        <div class="input-group mb-3">
+            <input type="text" id="query" class="form-control" placeholder="Enter search query...">
+            <button class="btn btn-primary" onclick="search()">Search</button>
+        </div>
+        <div id="results" class="mt-4"></div>
+    </div>
+
+    <script>
+        function search() {
+            let query = document.getElementById("query").value;
+            if (!query) return alert("Enter a search term!");
+
+            fetch(`/search?q=${encodeURIComponent(query)}`)
+                .then(response => response.json())
+                .then(data => {
+                    let resultsDiv = document.getElementById("results");
+                    resultsDiv.innerHTML = `<h3>Results for "${data.query}":</h3>`;
+
+                    data.results.split("\n\n").forEach(item => {
+                        if (item.trim()) {
+                            resultsDiv.innerHTML += `<div class="card p-3 mt-2">${item}</div>`;
+                        }
+                    });
+                });
+        }
+    </script>
+</body>
+</html>
